@@ -1,0 +1,10 @@
+model_pathes:
+  ranker:
+    model: /base/save_models/qwen_rank/
+    vhead: /base/save_models/qwen_rank/value_head.safetensors
+  callback: /base/save_models/qwen_callback
+  user_model: /base/save_models/qwen_xiaoming_drop_last/
+  qwen: /base/pretrain_model/Qwen2.5-7B/
+  bge: /base/pretrain_model/bge-base-zh-v1.5/
+data_pathes:
+  test: /base/data/overall_dialouge_view/test.json
