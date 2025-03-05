@@ -109,7 +109,7 @@ def chat(history, dialog):
 
 # load test data
 episodes = []
-with open('/group/30106/主动话题/data/history_data_test.json') as f:
+with open(config['data_pathes']['test']) as f:
     for line in f:
         data = json.loads(line)
         output_data = {'callback_day':data['callback_day'],'dialog':[], 'topic':[], 'sub_topic':[]}
