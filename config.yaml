@@ -8,3 +8,4 @@ model_pathes:
   bge: /base/pretrain_model/bge-base-zh-v1.5/
 data_pathes:
   test: /base/data/overall_dialouge_view/test.json
+  episodes: /base/data/episodes.json
