@@ -12,8 +12,10 @@ from tqdm import tqdm
 
 from ranker_utils import rank_model_retrieval
 from utils import load_rank_model, load_qwen, load_config
+from test_data import load_episodes
 
-config = load_config
+
+config = load_config()
 
 
 def _add_or_replace_eos_token(tokenizer: "PreTrainedTokenizer", eos_token: str) -> None:
@@ -47,9 +49,6 @@ _add_or_replace_eos_token(xiaoming_tokenizer, '<|im_end|>')
 callback_device = torch.device('cuda:1')
 callback_path = config['model_pathes']['callback']
 callback_model, callback_tokenizer = load_qwen(callback_path, callback_device)
-
-with open('data/episodes.json') as f:
-    episodes = json.load(f)
 
 xiaoming_template = """<|im_start|>system
 你是小明，正在与对话机器人Lucy进行聊天。<|im_end|>
@@ -145,6 +144,8 @@ def format_history(history, topic, sub_topic):
     history = '主题：{}\n细化主题：{}\n\n'.format(topic, sub_topic) + history
     return history
 
+
+episodes = load_episodes(config)
 
 ## 检索一次
 round = 10

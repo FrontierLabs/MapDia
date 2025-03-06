@@ -13,9 +13,10 @@ from tqdm import tqdm
 
 from ranker_utils import rank_model_retrieval
 from utils import load_rank_model, load_qwen, load_config
+from test_data import load_episodes
 
-config = load_config
 
+config = load_config()
 
 def _add_or_replace_eos_token(tokenizer, eos_token) -> None:
     is_added = tokenizer.eos_token_id is None
@@ -149,6 +150,8 @@ def format_history(history, topic, sub_topic):
     history = '主题：{}\n细化主题：{}\n\n'.format(topic, sub_topic) + history
     return history
 
+
+episodes = load_episodes(config)
 
 ## 检索一次
 round = 10

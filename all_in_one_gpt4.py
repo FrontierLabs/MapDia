@@ -13,8 +13,10 @@ from gpt_with_temperature import get_gpt_response
 from tqdm import tqdm
 
 from utils import load_qwen, load_config
+from test_data import load_episodes
 
-config = load_config
+
+config = load_config()
 
 xiaoming_path = config['model_pathes']['user_model']
 device = torch.device('cuda:0')
@@ -111,14 +113,12 @@ def chat(history_prompt, dialog, dialog_with_thoughts, greedy=False):
     return dialog, dialog_with_thoughts
 
 
-with open('data/episodes.json') as f:
-    episodes = json.load(f)
-
-
 def format_history(history, topic, sub_topic):
     history = '主题：{}\n细化主题：{}\n\n'.format(topic, sub_topic) + history
     return history
 
+
+episodes = load_episodes(config)
 
 ## 检索一次
 torch.cuda.empty_cache()
