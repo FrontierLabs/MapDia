@@ -19,7 +19,7 @@ config = load_config
 
 def _add_or_replace_eos_token(tokenizer, eos_token) -> None:
     is_added = tokenizer.eos_token_id is None
-    is_oov = eos_token not in tokenizer.get_vocab()
+    is_out_of_vocabulary = eos_token not in tokenizer.get_vocab()
     tokenizer.add_special_tokens({"eos_token": eos_token})
 
     if is_added:
@@ -27,7 +27,7 @@ def _add_or_replace_eos_token(tokenizer, eos_token) -> None:
     else:
         print("Replace eos token: {}".format(tokenizer.eos_token))
 
-    if is_oov:
+    if is_out_of_vocabulary:
         print("New tokens have been added, make sure `resize_vocab` is True.")
 
 
@@ -128,10 +128,10 @@ def chat(history, dialog, greedy=False):
             qwen_output = qwen_model.generate(**qwen_input, do_sample=True,
                                               max_new_tokens=100,
                                               temperature=1.,
-                                              eos_token_id=xiaoming_tokenizer.eos_token_id,
-                                              pad_token_id=xiaoming_tokenizer.eos_token_id)
-            qwen_output = qwen_tokenizer.decode(qwen_output[0]).split('<|im_start|>assistant')[1].replace('<|im_end|>',
-                                                                                                          '').strip()
+                                              eos_token_id=qwen_tokenizer.eos_token_id,
+                                              pad_token_id=qwen_tokenizer.eos_token_id)
+            decoded_output = qwen_tokenizer.decode(qwen_output[0])
+            qwen_output = decoded_output.split('<|im_start|>assistant')[1].replace('<|im_end|>', '').strip()
             output_flag = check_qwen_output(qwen_output)
             if output_flag:
                 dialog += '\n' + qwen_output
