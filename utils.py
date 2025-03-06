@@ -16,7 +16,7 @@ CONFIG_PATH = "config.yaml"
 
 
 def load_bge(bge_path, bge_device):
-    # bert model不支持device_map='auto'
+    # Load and initialize BGE embedding model for text encoding
     bge = AutoModel.from_pretrained(bge_path)
     bge_tokenizer = AutoTokenizer.from_pretrained(bge_path)
     bge.to(bge_device)
@@ -25,6 +25,7 @@ def load_bge(bge_path, bge_device):
 
 
 def load_qwen(qwen_path, device=None):
+    # Load Qwen language model with FP16 precision
     if device:
         qwen = AutoModelForCausalLM.from_pretrained(qwen_path, torch_dtype=torch.float16, device_map=device)
     else:
@@ -35,14 +36,16 @@ def load_qwen(qwen_path, device=None):
 
 
 def load_rank_model(rank_model_path, vhead_file, rank_device):
+    # Initialize ranking model with value head for preference learning
     rank_model = AutoModelForCausalLMWithValueHead.from_pretrained(rank_model_path)
     rank_tokenizer = AutoTokenizer.from_pretrained(rank_model_path, use_fast=False)
 
-    # 这里要把value head权重加载进来
+    # Load value head weights from safetensors file
     from safetensors import safe_open
     with safe_open(vhead_file, framework="pt", device="cpu") as f:
         vhead_param = {key: f.get_tensor(key) for key in f.keys()}
 
+    # Apply value head weights and move model to specified device
     rank_model.load_state_dict(vhead_param, strict=False)
     rank_model = rank_model.half()
     rank_model.eval()
