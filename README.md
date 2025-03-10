@@ -3,7 +3,7 @@
 This repository provides an implementation of the joint RAG-based framework introduced in the paper "Interpersonal Memory Matters: A New Task for Proactive Dialogue Utilizing Conversational History" . The framework is designed to tackle the Memory-aware Proactive Dialogue (MapDia) Task , which focuses on utilizing conversational history to generate proactive and contextually relevant dialogues.
 
 
-**[Interpersonal Memory Matters: A New Task for Proactive Dialogue Utilizing Conversational History](arxiv link)**
+**[Interpersonal Memory Matters: A New Task for Proactive Dialogue Utilizing Conversational History](https://arxiv.org/abs/2503.05150)**
 </br>
 [![ChMapData Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-violet)](https://huggingface.co/datasets/FrontierLab/ChMap-Data)
 
@@ -59,9 +59,14 @@ The script will generate proactive dialogue responses based on the provided conv
 If you find this project useful, please cite the original paper:
 
 ```bibtex
-@inproceedings{your-paper-handle,
-  title={Interpersonal Memory Matters: A New Task for Proactive Dialogue Utilizing Conversational History},
-  year={2025}
+@misc{wu2025interpersonalmemorymattersnew,
+      title={Interpersonal Memory Matters: A New Task for Proactive Dialogue Utilizing Conversational History}, 
+      author={Bowen Wu and Wenqing Wang and Haoran Li and Ying Li and Jingsong Yu and Baoxun Wang},
+      year={2025},
+      eprint={2503.05150},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2503.05150}, 
 }
 ```
 
