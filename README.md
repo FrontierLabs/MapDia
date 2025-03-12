@@ -36,7 +36,7 @@ Download the `overall_dialogue_review/test.json` file and place it in the root d
 
 ### 2. Preprocess Test Data
 
-To reduce runtime overhead during inference, preprocess the test data using the `test.py` script:
+To reduce runtime overhead during inference, preprocess the test data using the `test_data.py` script:
 ```bash
 python test_data.py
 ```
